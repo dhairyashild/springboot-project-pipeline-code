@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: spring-boot-ingress
+  namespace: workshop  
   annotations:
     kubernetes.io/ingress.className: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
