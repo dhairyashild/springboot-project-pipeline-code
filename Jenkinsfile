@@ -13,44 +13,44 @@ pipeline {
         // docker "docker"
     }
     stages {
-//         stage("clone") {
-//             steps {
-// checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/dhairyashild/springboot-java-poject-small-devopsshack-copy.git']])       
-//                     }
-//         }
-//         stage("build") {
-//             steps {
-//                 dir ('/home/ubuntu/jenkins/workspace/springboot-project-pipeline-code/'){
-//                 sh 'mvn clean install'
-//                 }
+        stage("clone") {
+            steps {
+checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/dhairyashild/springboot-java-poject-small-devopsshack-copy.git']])       
+                    }
+        }
+        stage("build") {
+            steps {
+                dir ('/home/ubuntu/jenkins/workspace/springboot-project-pipeline-code/'){
+                sh 'mvn clean install'
+                }
                     
-//                 }
-//         }
+                }
+        }
         
-//         stage("sonar") {
-//             steps {
-//               sh '''mvn clean verify sonar:sonar \
-//   -Dsonar.projectKey=springboot-project-pipeline-code \
-//   -Dsonar.host.url=http://52.66.197.219:9000 \
-//   -Dsonar.login=sqp_301a5ec1a74ece60154cffdba037544a0ebc0671'''    
-//                 }
+        stage("sonar") {
+            steps {
+              sh '''mvn clean verify sonar:sonar \
+  -Dsonar.projectKey=springboot-project-pipeline-code \
+  -Dsonar.host.url=http://52.66.197.219:9000 \
+  -Dsonar.login=sqp_301a5ec1a74ece60154cffdba037544a0ebc0671'''    
+                }
                     
-//                 }
+                }
 
 
   
 
-// stage ('ecr push'){
-//     steps{
-//         sh 'aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/d8y1d3c0'
+stage ('ecr push'){
+    steps{
+        sh 'aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/d8y1d3c0'
         
-//          sh 'docker build -t spring-app .'
+         sh 'docker build -t spring-app .'
         
-//          sh 'docker tag spring-app:latest public.ecr.aws/d8y1d3c0/spring-app:latest'
+         sh 'docker tag spring-app:latest public.ecr.aws/d8y1d3c0/spring-app:latest'
          
-//          sh 'docker push public.ecr.aws/d8y1d3c0/spring-app:latest'
-//     }
-// }
+         sh 'docker push public.ecr.aws/d8y1d3c0/spring-app:latest'
+    }
+}
 
 stage("terraform clone repo") {
             steps {
@@ -84,14 +84,14 @@ stage("terraform clone repo") {
             }
                 }
           
-            //       stage("terraform apply") {
-            // steps {
-            //     dir ('CONTINEOUS-DEPLOYMENT'){
-            //     sh 'terraform apply --auto-approve'
+                  stage("terraform apply") {
+            steps {
+                dir ('CONTINEOUS-DEPLOYMENT'){
+                sh 'terraform apply --auto-approve'
                 
-            //     }
-            // }
-            //     } 
+                }
+            }
+                } 
             stage("set context") {
             steps {
                 sh 'aws eks update-kubeconfig --region ap-south-1 --name example'
