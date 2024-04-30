@@ -1,13 +1,14 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: spring-boot-ingress
-  namespace: workshop  
+  name: mainlb
+  namespace: workshop
   annotations:
-    kubernetes.io/ingress.className: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
 spec:
+  ingressClassName: alb
   rules:
     - http:
         paths:
@@ -16,5 +17,5 @@ spec:
             backend:
               service:
                 name: spring-boot-service
-                port:
+                port: 
                   number: 8080
