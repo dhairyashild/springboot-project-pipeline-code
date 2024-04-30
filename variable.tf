@@ -10,7 +10,7 @@ variable "public_subnets" {
 #jenkins ec2 variables
 variable "instance_type" {
   type    = string
-  default = "t2.micro"
+  default = "t2.medium"
 
 }
 #worker ec2 variable
