@@ -15,15 +15,15 @@ eksctl delete iamserviceaccount --cluster=my-cluster --namespace=kube-system --n
 # Create IAM service account
 eksctl create iamserviceaccount --cluster=my-cluster --namespace=kube-system --name=aws-load-balancer-controller --role-name AmazonEKSLoadBalancerControllerRole --attach-policy-arn=arn:aws:iam::103849455660:policy/AWSLoadBalancerControllerIAMPolicy --approve --region=ap-south-1
 
-
+sleep 90
 # Install Helm
-# sudo snap install helm --classic
+sudo snap install helm --classic
 
 # # Add Helm repository
-# helm repo add eks https://aws.github.io/eks-charts
+helm repo add eks https://aws.github.io/eks-charts
 
 # # Update Helm repositories
-# helm repo update eks
+helm repo update eks
 
 # Install AWS Load Balancer Controller
 helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system --set clusterName=my-cluster --set serviceAccount.create=false --set serviceAccount.name=aws-load-balancer-controller
