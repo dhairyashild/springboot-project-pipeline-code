@@ -39,11 +39,7 @@ pipeline {
                 sh 'docker push public.ecr.aws/d8y1d3c0/spring-app:latest'
             }
         }
-        stage("terraform clone repo") {
-            steps {
-                checkout scm
-            }
-        }
+      
         stage("terraform init") {
             steps {
                 dir('CONTINEOUS-DEPLOYMENT') {
