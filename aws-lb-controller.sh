@@ -7,12 +7,12 @@ curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-cont
 aws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicy --policy-document file://iam_policy.json
 
 # # Associate IAM OIDC provider
-# eksctl utils associate-iam-oidc-provider --region=ap-south-1 --cluster=my-cluster --approve
+eksctl utils associate-iam-oidc-provider --region=ap-south-1 --cluster=my-cluster --approve
 
 # # Delete existing IAM service account
 # eksctl delete iamserviceaccount --cluster=my-cluster --namespace=kube-system --name=aws-load-balancer-controller --region=ap-south-1
 # Check if the IAM service account exists
-
+eksctl get iamserviceaccount --cluster=my-cluster
 
 # # Install Helm
 sudo snap install helm --classic
