@@ -20,13 +20,13 @@ if ! eksctl get iamserviceaccount --cluster=my-cluster --namespace=kube-system -
 fi
 eksctl get iamserviceaccount --cluster=my-cluster
 # # Install Helm
-# sudo snap install helm --classic
+sudo snap install helm --classic
 
 # # Add Helm repository
-# helm repo add eks https://aws.github.io/eks-charts
+helm repo add eks https://aws.github.io/eks-charts
 
 # # Update Helm repositories
-# helm repo update
+helm repo update
 
 # Check if the release exists and delete it if it does
 if helm status aws-load-balancer-controller >/dev/null 2>&1; then
