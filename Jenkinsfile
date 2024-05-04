@@ -94,7 +94,7 @@ stage("terraform clone repo") {
                 } 
             stage("set context") {
             steps {
-                sh 'aws eks update-kubeconfig --region ap-south-1 --name example'
+                sh 'aws eks update-kubeconfig --region ap-south-1 --name my-cluster'
                 sh 'kubectl create namespace workshop'
             
             }
