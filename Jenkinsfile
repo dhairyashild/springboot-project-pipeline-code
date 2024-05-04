@@ -13,12 +13,11 @@ pipeline {
     stages {
         stage("clone") {
             steps {
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/dhairyashild/springboot-project-pipeline-code.git']])
-            }
+checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/dhairyashild/project-repo.git']])            }
         }
         stage("build") {
             steps {
-                dir('/home/ubuntu/jenkins/workspace/springboot-project-pipeline-code/') {
+                dir('/home/ubuntu/jenkins/workspace/springboot-project-pipeline-code/springboot-java-poject') {
                     sh 'mvn clean install'
                 }
             }
@@ -40,6 +39,13 @@ pipeline {
             }
         }
       
+stage("clone") {
+            steps {
+checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/dhairyashild/springboot-project-pipeline-code.git']])        
+            }
+    
+}
+
         stage("terraform init") {
             steps {
                 dir('CONTINEOUS-DEPLOYMENT') {
