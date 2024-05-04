@@ -14,6 +14,7 @@ eksctl utils associate-iam-oidc-provider --region=ap-south-1 --cluster=my-cluste
 
 eksctl get iamserviceaccount --cluster=my-cluster
 eksctl create iamserviceaccount --cluster=my-cluster --namespace=kube-system --name=aws-load-balancer-controller --role-name AmazonEKSLoadBalancerControllerRole --attach-policy-arn=arn:aws:iam::103849455660:policy/AWSLoadBalancerControllerIAMPolicy --approve --region=ap-south-1
+touch start.txt
 sleep 200
 # # Install Helm
 sudo snap install helm --classic
