@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Download IAM policy document
-curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/install/iam_policy.json
+# curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/install/iam_policy.json
 
-# Create IAM policy
-aws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicy --policy-document file://iam_policy.json
+# # Create IAM policy
+# aws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicy --policy-document file://iam_policy.json
 
-# Associate IAM OIDC provider
-eksctl utils associate-iam-oidc-provider --region=ap-south-1 --cluster=my-cluster --approve
+# # Associate IAM OIDC provider
+# eksctl utils associate-iam-oidc-provider --region=ap-south-1 --cluster=my-cluster --approve
 
 # Delete existing IAM service account
 # eksctl delete iamserviceaccount --cluster=my-cluster --namespace=kube-system --name=aws-load-balancer-controller --region=ap-south-1
