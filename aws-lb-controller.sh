@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Download IAM policy document
-# curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/install/iam_policy.json
+curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/install/iam_policy.json
 
 # Create IAM policy
-# aws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicy --policy-document file://iam_policy.json
+aws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicy --policy-document file://iam_policy.json
 
 # Associate IAM OIDC provider
 eksctl utils associate-iam-oidc-provider --region=ap-south-1 --cluster=my-cluster --approve
