@@ -16,7 +16,7 @@ eksctl get iamserviceaccount --cluster=my-cluster
 eksctl create iamserviceaccount --cluster=my-cluster --namespace=kube-system --name=aws-load-balancer-controller --role-name AmazonEKSLoadBalancerControllerRole --attach-policy-arn=arn:aws:iam::103849455660:policy/AWSLoadBalancerControllerIAMPolicy --approve --region=ap-south-1
 sleep 200
 # # Install Helm
-# sudo snap install helm --classic
+sudo snap install helm --classic
 
 # # Add Helm repository
 helm repo add eks https://aws.github.io/eks-charts
