@@ -11,14 +11,30 @@ aws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicy --policy-
 
 # # Delete existing IAM service account
 # eksctl delete iamserviceaccount --cluster=my-cluster --namespace=kube-system --name=aws-load-balancer-controller --region=ap-south-1
-eksctl get iamserviceaccount --cluster=my-cluster
-# Create IAM service account
 # Check if the IAM service account exists
 if ! eksctl get iamserviceaccount --cluster=my-cluster --namespace=kube-system --name=aws-load-balancer-controller; then
+    # Print a message indicating that the IAM service account doesn't exist
+    echo "IAM service account 'aws-load-balancer-controller' does not exist. Creating..."
+
     # Create IAM service account
-    eksctl create iamserviceaccount --cluster=my-cluster --namespace=kube-system --name=aws-load-balancer-controller --role-name AmazonEKSLoadBalancerControllerRole --attach-policy-arn=arn:aws:iam::103849455660:policy/AWSLoadBalancerControllerIAMPolicy --approve --region=ap-south-1
+    eksctl create iamserviceaccount --cluster=my-cluster \
+        --namespace=kube-system \
+        --name=aws-load-balancer-controller \
+        --role-name AmazonEKSLoadBalancerControllerRole \
+        --attach-policy-arn=arn:aws:iam::103849455660:policy/AWSLoadBalancerControllerIAMPolicy \
+        --approve --region=ap-south-1
+
+    # Check if the IAM service account creation was successful
+    if [ $? -eq 0 ]; then
+        echo "IAM service account created successfully."
+    else
+        echo "Error: IAM service account creation failed."
+        exit 1  # Exit the script with a non-zero status code
+    fi
+else
+    echo "IAM service account 'aws-load-balancer-controller' already exists."
 fi
-eksctl get iamserviceaccount --cluster=my-cluster
+
 # # Install Helm
 sudo snap install helm --classic
 
