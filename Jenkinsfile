@@ -39,7 +39,7 @@ checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs:
             }
         }
       
-stage("clone") {
+stage("clone-terraform-code") {
             steps {
 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/dhairyashild/springboot-project-pipeline-code.git']])        
             }
