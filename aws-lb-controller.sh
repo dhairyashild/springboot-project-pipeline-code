@@ -13,6 +13,7 @@ eksctl utils associate-iam-oidc-provider --region=ap-south-1 --cluster=my-cluste
 eksctl delete iamserviceaccount --cluster=my-cluster --namespace=kube-system --name=aws-load-balancer-controller --region=ap-south-1
 
 # Create IAM service account
+eksctl delete iamserviceaccount     --cluster=my-cluster     --namespace=kube-system     --name=aws-load-balancer-controller    --region=ap-south-1
 eksctl create iamserviceaccount \
     --cluster=my-cluster \
     --namespace=kube-system \
