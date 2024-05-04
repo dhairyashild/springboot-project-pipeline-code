@@ -11,8 +11,9 @@ eksctl utils associate-iam-oidc-provider --region=ap-south-1 --cluster=my-cluste
 
 # # Delete existing IAM service account
 # eksctl delete iamserviceaccount --cluster=my-cluster --namespace=kube-system --name=aws-load-balancer-controller --region=ap-south-1
-# Check if the IAM service account exists
+
 eksctl get iamserviceaccount --cluster=my-cluster
+eksctl create iamserviceaccount -f iam_service_account.yaml --approve
 
 # # Install Helm
 sudo snap install helm --classic
