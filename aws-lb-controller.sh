@@ -13,15 +13,8 @@ eksctl utils associate-iam-oidc-provider --region=ap-south-1 --cluster=my-cluste
 eksctl delete iamserviceaccount --cluster=my-cluster --namespace=kube-system --name=aws-load-balancer-controller --region=ap-south-1
 
 # Create IAM service account
-eksctl delete iamserviceaccount     --cluster=my-cluster     --namespace=kube-system     --name=aws-load-balancer-controller    --region=ap-south-1
-eksctl create iamserviceaccount \
-    --cluster=my-cluster \
-    --namespace=kube-system \
-    --name=aws-load-balancer-controller \
-    --role-name AmazonEKSLoadBalancerControllerRole \
-    --attach-policy-arn=arn:aws:iam::103849455660:policy/AWSLoadBalancerControllerIAMPolicy \
-    --approve \
-    --region=ap-south-1
+eksctl create iamserviceaccount --cluster=my-cluster --namespace=kube-system --name=aws-load-balancer-controller --role-name AmazonEKSLoadBalancerControllerRole --attach-policy-arn=arn:aws:iam::103849455660:policy/AWSLoadBalancerControllerIAMPolicy --approve --region=ap-south-1
+
 
 # Install Helm
 sudo snap install helm --classic
@@ -33,7 +26,7 @@ helm repo add eks https://aws.github.io/eks-charts
 helm repo update eks
 
 # Install AWS Load Balancer Controller
-helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system --set clusterName=my-cluster --set serviceAccount.create=false --set serviceAccount.name=aws-load-balancer-controllerr
+helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system --set clusterName=my-cluster --set serviceAccount.create=false --set serviceAccount.name=aws-load-balancer-controller
 
 # Check the deployment status
 kubectl get deployment -n kube-system aws-load-balancer-controller
