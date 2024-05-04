@@ -105,8 +105,8 @@ stage("terraform clone repo") {
               
                sh 'curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/install/iam_policy.json'
                 sh 'aws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicy --policy-document file://iam_policy.json'
-                sh 'eksctl utils associate-iam-oidc-provider --region=ap-south-1 --cluster=example --approve'
-                sh 'eksctl create iamserviceaccount --cluster=example --namespace=kube-system --name=aws-load-balancer-controller --role-name AmazonEKSLoadBalancerControllerRole --attach-policy-arn=arn:aws:iam::103849455660:policy/AWSLoadBalancerControllerIAMPolicy --approve --region=ap-south-1'
+                sh 'eksctl utils associate-iam-oidc-provider --region=ap-south-1 --cluster=my-cluster --approve'
+                sh 'eksctl create iamserviceaccount --cluster=my-cluster --namespace=kube-system --name=aws-load-balancer-controller --role-name AmazonEKSLoadBalancerControllerRole --attach-policy-arn=arn:aws:iam::103849455660:policy/AWSLoadBalancerControllerIAMPolicy --approve --region=ap-south-1'
                 
             }
                 }
