@@ -24,18 +24,22 @@ checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs:
         }
         stage("sonar") {
             steps {
+                dir('/home/ubuntu/jenkins/workspace/springboot-project-pipeline-code/springboot-java-poject') {
                 sh '''mvn clean verify sonar:sonar \
   -Dsonar.projectKey=eks-proect \
   -Dsonar.host.url=http://3.108.221.108:9000 \
   -Dsonar.login=sqp_cb72a0b72bc885c243c332979839cb36d97c4bc6'''
-            }
+                    }
+                }
         }
         stage('ecr push') {
             steps {
+                                dir('/home/ubuntu/jenkins/workspace/springboot-project-pipeline-code/springboot-java-poject') {
                 sh 'aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/d8y1d3c0'
                 sh 'docker build -t spring-app .'
                 sh 'docker tag spring-app:latest public.ecr.aws/d8y1d3c0/spring-app:latest'
                 sh 'docker push public.ecr.aws/d8y1d3c0/spring-app:latest'
+                }
             }
         }
       
