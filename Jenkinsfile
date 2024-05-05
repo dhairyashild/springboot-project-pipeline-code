@@ -27,8 +27,8 @@ checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs:
                 dir('/home/ubuntu/jenkins/workspace/springboot-project-pipeline-code/springboot-java-poject') {
                 sh '''mvn clean verify sonar:sonar \
   -Dsonar.projectKey=eks-proect \
-  -Dsonar.host.url=http://3.108.221.108:9000 \
-  -Dsonar.login=sqp_cb72a0b72bc885c243c332979839cb36d97c4bc6'''
+  -Dsonar.host.url=http://13.235.113.124:9000 \
+  -Dsonar.login=sqp_8b81b30552c6756f40b482e6690b47f35a41c8cc'''
                     }
                 }
         }
