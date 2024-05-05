@@ -80,19 +80,22 @@ checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs:
         }
         stage("set context") {
             steps {
-                sh 'aws eks update-kubeconfig --region ap-south-1 --name my-cluster'
-                sh 'kubectl create namespace workshop'
+                // sh 'aws eks update-kubeconfig --region ap-south-1 --name my-cluster'
+                // sh 'kubectl create namespace workshop'
+                sh 'echo hi'
             }
         }
         stage('create service account') {
             steps {
-                sh 'chmod 777 aws-lb-controller.sh'
-                sh './aws-lb-controller.sh'
+                // sh 'chmod 777 aws-lb-controller.sh'
+                // sh './aws-lb-controller.sh'
+                sh 'echo hi'
             }
         }
         stage('apply manifest files') {
             steps {
-                sh 'kubectl apply -f kubernates_manifest'
+               // sh 'kubectl apply -f kubernates_manifest'
+                sh 'echo hi'
             }
         }
     }
