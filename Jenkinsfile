@@ -98,5 +98,13 @@ checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs:
                 sh 'echo hi'
             }
         }
+       stage('add prometheus and grafana using helm commands') {
+            steps {
+               // sh 'kubectl apply -f kubernates_manifest'
+                sh 'echo hi'
+            }
+        }
+
+        
     }
 }
