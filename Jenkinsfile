@@ -25,7 +25,7 @@ checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs:
         }
         
       stage('SonarQube Analysis') {
-    def mvn = tool 'Default aven';
+    def mvn = tool 'Default maven';
     withSonarQubeEnv() {
       sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=java-project"
     }
