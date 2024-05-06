@@ -13,8 +13,10 @@ pipeline {
     stages {
         stage("clone") {
             steps {
-checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/dhairyashild/project-repo.git']])            }
+checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/dhairyashild/project-repo.git']])           
+            }
         }
+        
         stage("build") {
             steps {
                 dir('/home/ubuntu/jenkins/workspace/springboot-project-pipeline-code/springboot-java-poject') {
@@ -22,6 +24,7 @@ checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs:
                 }
             }
         }
+        
         stage("sonar") {
             steps {
                 dir('/home/ubuntu/jenkins/workspace/springboot-project-pipeline-code/springboot-java-poject') {
@@ -32,9 +35,10 @@ checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs:
                     }
                 }
         }
+        
         stage('ecr push') {
             steps {
-                                dir('/home/ubuntu/jenkins/workspace/springboot-project-pipeline-code/springboot-java-poject') {
+                dir('/home/ubuntu/jenkins/workspace/springboot-project-pipeline-code/springboot-java-poject') {
                 sh 'aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/d8y1d3c0'
                 sh 'docker build -t spring-app .'
                 sh 'docker tag spring-app:latest public.ecr.aws/d8y1d3c0/spring-app:latest'
@@ -46,10 +50,9 @@ checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs:
 stage("clone-terraform-code") {
             steps {
 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/dhairyashild/springboot-project-pipeline-code.git']])        
-            }
-    
+            }   
 }
-
+        
         stage("terraform init") {
             steps {
                 dir('CONTINEOUS-DEPLOYMENT') {
@@ -78,33 +81,5 @@ checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs:
                 }
             }
         }
-        stage("set context") {
-            steps {
-                // sh 'aws eks update-kubeconfig --region ap-south-1 --name my-cluster'
-                // sh 'kubectl create namespace workshop'
-                sh 'echo hi'
-            }
-        }
-        stage('create service account') {
-            steps {
-                // sh 'chmod 777 aws-lb-controller.sh'
-                // sh './aws-lb-controller.sh'
-                sh 'echo hi'
-            }
-        }
-        stage('apply manifest files') {
-            steps {
-               // sh 'kubectl apply -f kubernates_manifest'
-                sh 'echo hi'
-            }
-        }
-       stage('add prometheus and grafana using helm commands') {
-            steps {
-               // sh 'kubectl apply -f kubernates_manifest'
-                sh 'echo hi'
-            }
-        }
-
-        
     }
 }
