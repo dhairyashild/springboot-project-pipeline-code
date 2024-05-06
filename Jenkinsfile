@@ -72,7 +72,7 @@ checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs:
         stage("terraform apply") {
             steps {
                 dir('CONTINEOUS-DEPLOYMENT') {
-                    sh 'terraform apply --auto-approve'
+                    sh 'terraform $ACTION --auto-approve'
                 }
             }
         }
