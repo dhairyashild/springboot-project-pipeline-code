@@ -13,13 +13,12 @@ pipeline {
     stages {
         stage("clone") {
             steps {
-checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/dhairyashild/project-repo.git']])           
-            }
+checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/dhairyashild/java-springboot-code.git']])            }
         }
         
         stage("build") {
             steps {
-                dir('/home/ubuntu/jenkins/workspace/springboot-project-pipeline-code/springboot-java-poject') {
+                dir('/home/ubuntu/jenkins/workspace/springboot-project-pipeline-code/java-springboot-code') {
                     sh 'mvn clean install'
                 }
             }
@@ -34,7 +33,7 @@ checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs:
         
         stage('ecr push') {
             steps {
-                dir('/home/ubuntu/jenkins/workspace/springboot-project-pipeline-code/springboot-java-poject') {
+                dir('/home/ubuntu/jenkins/workspace/springboot-project-pipeline-code/java-springboot-code') {
                 sh 'aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/d8y1d3c0'
                 sh 'docker build -t spring-app .'
                 sh 'docker tag spring-app:latest public.ecr.aws/d8y1d3c0/spring-app:latest'
